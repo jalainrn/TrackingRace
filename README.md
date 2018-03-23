@@ -1,2 +1,2 @@
 # TrackingRace
-CodeLou Graduation
+CodeLou Graduation Project
