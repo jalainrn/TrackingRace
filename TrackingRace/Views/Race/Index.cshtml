@@ -1,0 +1,84 @@
+﻿
+@model TrackingRace.ViewModels.RaceListViewModel
+
+@Html.Partial("_Message")
+
+<div class="d-inline-block">
+    <h2>@ViewBag.Title</h2>
+</div>
+
+<div class="d-inline-block float-right">
+    <a href="@Url.Action("Add")" class="btn btn-primary btn">Add</a>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            @*<th>Id</th>*@
+            <th>Race</th>
+            <th>RaceType</th>
+            <th>Profit</th>
+            <th>City</th>
+            <th>State</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (var i = 0; i < Model.Races.Count; i++)
+        {
+        <tr>
+            @*<td>@Model.States[i].Id</td>*@
+            <td>@Model.Races[i].Name</td>
+            <td>@Model.Races[i].RaceTypeName</td>
+            <td>@Model.Races[i].Profit</td>
+            <td>@Model.Races[i].City</td>
+            <td>@Model.Races[i].StateName</td>
+            <td>
+                <div class="float-right">
+                    @*<a href="@Url.Action("Detail", new { id = Model.Races[i].Id })" class="btn btn-primary btn-xs margin-right">
+            <span class="glyphicon glyphicon-info-sign"></span><span class="hidden-xs"> Detail</span>
+        </a>*@
+
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <a href="@Url.Action("Edit", new { id = Model.Races[i].Id })" class="btn btn-secondary btn-xs margin-right">
+                            <span class="hidden-xs"> Edit</span>
+                        </a>
+                        <a href="@Url.Action("Detail", new { id = Model.Races[i].Id })" class="btn btn-secondary btn-xs margin-right">
+                            <span class="hidden-xs"> Detail</span>
+                        </a>
+                        <a data-toggle="modal" href="@("#deleteRaceModal" + i)" class="btn btn-danger btn-xs margin-right">
+                            <span class="hidden-xs"> Delete</span>
+                        </a>
+                    </div>
+
+                    <div class="modal fade" id="@("deleteRaceModal" + i)" tabindex="-1" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                @using (Html.BeginForm("Delete", "State"))
+                                {
+                                    <input type="hidden" value="@Model.Races[i].Id" name="Id" />
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Delete @Model.Races[i].Name</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure you want to delete @Model.Races[i].Name?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Yes</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+
+

@@ -1,0 +1,36 @@
+﻿@model TrackingRace.ViewModels.RaceTypeViewModel
+
+@Html.Partial("_Message")
+
+@{
+    var isEditMode = Model.Id != null;
+    ViewBag.Title = isEditMode ? "Edit" : "Add Race Type";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+<div class="row">
+    <div class="col-sm-6 col-xs-10">
+        @using (Html.BeginForm(isEditMode ? "Edit" : "Add", "RaceType"))
+        {
+            @Html.ValidationSummary("The following errors were found:", new { @class = "alert alert-dismissible alert-danger" })
+
+            @Html.HiddenFor(m => m.Id)
+            <div class="form-group col-md-6">
+                @Html.LabelFor(m => m.Name)
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+            </div>
+            <div class="form-group col-md-6">
+                @Html.LabelFor(m => m.DistanceKm)
+                @Html.TextBoxFor(m => m.DistanceKm, new { @class = "form-control col-md-4" })
+            </div>
+
+            <div class="form-group col-md-10 mt-4">
+                <button type="submit" class="btn btn-primary">@(isEditMode ? "Save" : "Add")</button>
+                @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-secondary" })
+            </div>
+        }
+    </div>
+</div>
+

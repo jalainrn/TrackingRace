@@ -1,0 +1,79 @@
+﻿@model TrackingRace.ViewModels.RaceViewModel
+
+@Html.Partial("_Message")
+
+@{
+    var isEditMode = Model.Id != null;
+    ViewBag.Title = isEditMode ? "Edit" : "Add Race";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+<div class="row">
+    <div class="col-sm-12 col-xs-10">
+        @using (Html.BeginForm(isEditMode ? "Edit" : "Add", "Race"))
+        {
+            @Html.ValidationSummary("The following errors were found:", new { @class = "alert alert-dismissible alert-danger" })
+
+            @Html.HiddenFor(m => m.Id)
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Name)
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-8">
+                    @Html.LabelFor(m => m.RaceTypeId)
+                    @Html.DropDownListFor(m => m.RaceTypeId, (SelectList)ViewBag.SelectRaceType, "", new { @class = "form-control" })
+                </div>
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(m => m.Date)
+                    @Html.TextBoxFor(m => m.Date, new { @class = "form-control datepicker" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Address)
+                @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(m => m.City)
+                    @Html.TextBoxFor(m => m.City, new { @class = "form-control" })
+                </div>
+
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(m => m.StateId)
+                    @Html.DropDownListFor(m => m.StateId, (SelectList)ViewBag.SelectState, "", new { @class = "form-control" })
+                </div>
+
+                <div class="form-group col-md-2">
+                    @Html.LabelFor(m => m.ZipCode)
+                    @Html.TextBoxFor(m => m.ZipCode, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.Profit) @Html.DisplayNameFor(m => m.Profit)
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">@(isEditMode ? "Save" : "Add")</button>
+                @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-secondary" })
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+        $('input.datepicker').datepicker({
+            format: 'm/d/yyyy'
+        });
+</script>
