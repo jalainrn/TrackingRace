@@ -18,6 +18,23 @@ namespace TrackingRace.Controllers
             _context = new Context();
         }
 
+        private bool _disposed = false;
+
+        protected override void Dispose(bool disposing)
+        {
+            if (_disposed)
+                return;
+
+            if (disposing)
+            {
+                _context.Dispose();
+            }
+
+            _disposed = true;
+
+            base.Dispose(disposing);
+        }
+
         // GET: States
         public ActionResult Index()
         {
@@ -35,6 +52,7 @@ namespace TrackingRace.Controllers
                         City = p.City,
                         StateId = p.StateId,
                         StateName = p.State.Name,
+                        StateAcronym = p.State.Acronym,
                         RaceTypeName = p.RaceType.Name,
                         RaceTypeId = p.RaceTypeId
                     }).ToList()
@@ -131,42 +149,8 @@ namespace TrackingRace.Controllers
 
             return View("AddEdit", raceViewModel);
         }
-
-
-
-
-
-
-
-
-
-
-        private bool _disposed = false;
-
-        protected override void Dispose(bool disposing)
-        {
-            if (_disposed)
-                return;
-
-            if (disposing)
-            {
-                _context.Dispose();
-            }
-
-            _disposed = true;
-
-            base.Dispose(disposing);
-        }
-
-
-
-
-
-
-
-
-
-
+        
+        //Detail
         public ActionResult DetailRace(int id)
         {
             //ViewBag.Title = "Detail";
@@ -184,18 +168,6 @@ namespace TrackingRace.Controllers
                         City = race.City,
                         StateId = race.StateId,
                         RaceTypeId = race.RaceTypeId
-                        //State = new StateViewModel
-                        //{
-                        //    Id = race.StateId,
-                        //    Name = race.State.Name,
-                        //    Acronym = race.State.Acronym
-                        //},
-                        //RaceType = new RaceTypeViewModel
-                        //{
-                        //    Id = race.RaceTypeId,
-                        //    Name = race.RaceType.Name,
-                        //    DistanceKm = race.RaceType.DistanceKm
-                        //}
                     };
                     ViewBag.Title = "Detail " + raceViewModel.Name;
                     return View(raceViewModel);

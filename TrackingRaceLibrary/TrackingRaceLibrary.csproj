@@ -51,6 +51,7 @@
     <Compile Include="Data\DatabaseInitializer.cs" />
     <Compile Include="Models\Gender.cs" />
     <Compile Include="Models\Race.cs" />
+    <Compile Include="Models\RaceRunner.cs" />
     <Compile Include="Models\RaceType.cs" />
     <Compile Include="Models\Runner.cs" />
     <Compile Include="Models\Size.cs" />

@@ -35,6 +35,7 @@ namespace TrackingRace.ViewModels
 
         [DisplayName("Date of Birthday:")]
         [Required(ErrorMessage = "The Date of Birthday field is required")]
+        [DataType(DataType.Date)]
         public DateTime DOB { get; set; }
 
         [DisplayName("Email:")]
@@ -47,8 +48,18 @@ namespace TrackingRace.ViewModels
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid Phone number")]
         public string Phone { get; set; }
 
-        [DisplayName("Waiver Agreement:")]
-        [Required(ErrorMessage = "Waiver Agreement should be accepted")]
+
+        public bool IsTrue => true;
+
+        [Required]
+        [DisplayName("I agree to the TrackingRace Agreement and Waiver")]
+        [Compare(nameof(IsTrue), ErrorMessage = "I agree to the TrackingRace Agreement and Waiver")]
+        //[Range(typeof(bool), "true", "true", ErrorMessage = "You must agree the waiver agreements to proceed.")]
         public bool WaiverAgreement { get; set; }
-    }
+
+        public virtual List<RaceViewModel> Races { get; set; }
+
+        [Required(ErrorMessage = "Please select a Race")]
+        public virtual int RaceId { get; set; }
+}
 }

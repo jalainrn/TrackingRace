@@ -8,7 +8,7 @@
 </div>
 
 <div class="d-inline-block float-right">
-    <a href="@Url.Action("Add")" class="btn btn-primary btn">Add</a>
+    <a href="@Url.Action("Signup")" class="btn btn-primary btn">Add</a>
 </div>
 
 <table class="table table-striped">
@@ -30,7 +30,7 @@
                 @*<td>@Model.States[i].Id</td>*@
                 <td>@Model.Runners[i].FName @Model.Runners[i].LName</td>
                 <td>@Model.Runners[i].GenderId</td>
-                <td>@Model.Runners[i].DOB</td>
+                <td>@Model.Runners[i].DOB.ToShortDateString()</td>
                 <td>@Model.Runners[i].Phone</td>
                 <td>@Model.Runners[i].Email</td>
                 <td>

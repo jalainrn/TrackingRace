@@ -7,28 +7,32 @@
     <h2>@ViewBag.Title</h2>
 </div>
 
-<table class="table table-striped">
-    <tbody>
-        @for (var i = 0; i < Model.Races.Count; i++)
-        {
-            <div class="card bg-light mb-3" style="max-width: 20rem;">
-                <div class="card-header">
-                    @Model.Races[i].City, @Model.Races[i].StateName
-                </div>
+@*<table class="table table-striped">
+    <tbody>*@
+        @*<div class="container py-3 bg-faded">
+            <div class="card-columns">*@
+                @for (var i = 0; i < Model.Races.Count; i++)
+                {
+                    <div class="card bg-light mb-3">
+                        <div class="card-header">
+                            @Model.Races[i].City, @Model.Races[i].StateAcronym
+                        </div>
 
-                <div class="card-body">
-                    <h4 class="card-title">@Model.Races[i].Name</h4>
-                    <div>@Model.Races[i].RaceTypeName</div>
-                    <div>@Html.Raw((Model.Races[i].Profit == true) ? "<div>Profit</div>" : "<div>Nonprofit</div>")</div>
-                    <div>@Model.Races[i].Date.ToString("mm - dd - yyyy")</div>
-                    <div class="d-inline-block float-right">
-                        <a href="@Url.Action("Signup", "Runner")" class="btn btn-primary">Sign up</a>
+                        <div class="card-body">
+                            <h4 class="card-title">@Model.Races[i].Name</h4>
+                            <div>@Model.Races[i].RaceTypeName</div>
+                            <div>@Html.Raw((Model.Races[i].Profit == true) ? "<div>Profit</div>" : "<div>Nonprofit</div>")</div>
+                            <div>@Model.Races[i].Date.ToString("MM/dd/yyyy")</div>
+                            <div class="d-inline-block float-right">
+                                <a href="@Url.Action("Signup", "Runner", new { raceId = Model.Races[i].Id })" class="btn btn-primary btn-sm">Sign up</a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        }
+                }
+            @*</div>
+        </div>
     </tbody>
-</table>
+</table>*@
 
 
 

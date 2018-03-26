@@ -19,16 +19,19 @@ namespace TrackingRaceLibrary.Data
         public DbSet<Race> Races { get; set; }
 
         public DbSet<Runner> Runners { get; set; }
+        public DbSet<RaceRunner> RaceRunners { get; set; }
 
         //protected override void OnModelCreating(DbModelBuilder modelBuilder)
         //{
-        //    modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+        //    //    modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
-        //modelBuilder.Entity<State>()
-        //            .HasMany<Race>(r => r.Id)
-        //            .WithRequired(s => s.Id)
-        //            .WillCascadeOnDelete(false);
-
-        //public System.Data.Entity.DbSet<TrackingRace.ViewModels.RaceViewModel> RaceViewModels { get; set; }
+        //    modelBuilder.Entity<Race>().HasMany(t => t.Runners).WithMany(x => x.Races)
+        //        .Map(m =>
+        //        {
+        //            m.ToTable("RaceRunner");
+        //            m.MapLeftKey("RaceId");
+        //            m.MapRightKey("RunnerId");
+        //        });
+        //}
     }
 }

@@ -33,10 +33,11 @@ namespace TrackingRaceLibrary.Models
         public string Email { get; set; }
 
         [DataType(DataType.PhoneNumber)]
-        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid Phone number")]
         public string Phone { get; set; }
 
         public bool WaiverAgreement { get; set; }
+
+        public virtual List<Race> Races { get; set; }
 
     }
 }

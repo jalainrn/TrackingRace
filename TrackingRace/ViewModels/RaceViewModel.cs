@@ -18,7 +18,8 @@ namespace TrackingRace.ViewModels
 
         [Required(ErrorMessage = "The Date field is required")]
         [Display(Name = "Date:")]
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
+        [DisplayFormat(DataFormatString = "{MM/dd/yyyy}")]
+        [DataType(DataType.Date)]
         public DateTime Date { get; set; }
 
         [Required(ErrorMessage = "The Race Type is required")]
@@ -54,8 +55,11 @@ namespace TrackingRace.ViewModels
 
         [Display(Name = "State:")]
         public string StateName { get; set; }
+        public string StateAcronym { get; set; }
 
         [Display(Name = "Race Type:")]
         public string RaceTypeName { get; set; }
+
+        public virtual List<RunnerViewModel> Runners { get; set; }
     }
 }

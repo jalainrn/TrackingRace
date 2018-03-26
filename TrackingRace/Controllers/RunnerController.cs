@@ -5,11 +5,37 @@ using System.Web;
 using System.Web.Mvc;
 using TrackingRace.ViewModels;
 using TrackingRaceLibrary.Data;
+using TrackingRaceLibrary.Models;
 
 namespace TrackingRace.Controllers
 {
     public class RunnerController : Controller
     {
+        private Context _context = null;
+
+        public RunnerController()
+        {
+            _context = new Context();
+        }
+
+        private bool _disposed = false;
+
+        protected override void Dispose(bool disposing)
+        {
+            if (_disposed)
+                return;
+
+            if (disposing)
+            {
+                _context.Dispose();
+            }
+
+            _disposed = true;
+
+            base.Dispose(disposing);
+        }
+
+
         // GET: Runner
         public ActionResult Index()
         {
@@ -37,6 +63,71 @@ namespace TrackingRace.Controllers
 
                 return View(runnerList);
             }
+        }
+
+        public ActionResult Signup(int? raceId)
+        {
+
+            ViewBag.Title = "Signup Runner";
+            var runnerViewModel = new RunnerViewModel();
+            runnerViewModel.DOB = DateTime.Now.Date;
+            if (raceId != null)
+            {
+                runnerViewModel.RaceId = raceId.Value;
+                ViewBag.Race = _context.Races.SingleOrDefault(r => r.Id == raceId);
+            }
+            else
+            {
+                ViewBag.SelectRace = new SelectList(_context.Races, "Id", "Name");
+            }
+
+            ViewBag.SelectGender = new SelectList(_context.Gender, "Id", "Name");
+
+            ViewBag.SelectSize = new SelectList(_context.Sizes, "Id", "Name");
+
+            return View("SignupEdit", runnerViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Signup(RunnerViewModel runnerViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var context = new Context())
+                {
+                    var runner = new Runner
+                    {
+                        FName = runnerViewModel.FName,
+                        LName = runnerViewModel.LName,
+                        SizeId = runnerViewModel.SizeId,
+                        GenderId = runnerViewModel.GenderId,
+                        DOB = runnerViewModel.DOB,
+                        Email = runnerViewModel.Email,
+                        Phone = runnerViewModel.Phone,
+                        WaiverAgreement = runnerViewModel.WaiverAgreement,
+                    };
+
+                    context.Runners.Add(runner);
+                    context.SaveChanges();
+
+                    var raceRunner = new RaceRunner
+                    {
+                        RaceId = runnerViewModel.RaceId,
+                        RunnerId = runner.Id
+                    };
+
+                    context.RaceRunners.Add(raceRunner);
+                    context.SaveChanges();
+
+                    TempData["Message"] = runner.FName + " " + runner.LName + " was successfully registered!";
+                };
+                
+                return RedirectToAction("Index", "Home");
+            }
+            ViewBag.SelectRace = new SelectList(_context.Races, "Id", "Name");
+            ViewBag.SelectGender = new SelectList(_context.Gender, "Id", "Name");
+            ViewBag.SelectSize = new SelectList(_context.Sizes, "Id", "Name");
+            return View("SignupEdit", runnerViewModel);
         }
     }
 }

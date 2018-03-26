@@ -1,0 +1,93 @@
+﻿@model TrackingRace.ViewModels.RunnerViewModel
+
+@Html.Partial("_Message")
+
+@{
+    var isEditMode = Model.Id != null;
+    ViewBag.Title = isEditMode ? "Edit" : "Sign Up";
+}
+
+<h2>@ViewBag.Title</h2>
+<div class="row">
+    <div class="col-sm-12 col-xs-10">
+        @using (Html.BeginForm("Signup", "Runner"))
+        {
+            @Html.ValidationSummary("The following errors were found:", new { @class = "alert alert-dismissible alert-danger" })
+
+            if (ViewBag.Race != null)
+            {
+                //var race = ViewBag.Race;
+                Model.RaceId = ViewBag.Race.Id;
+                @Html.HiddenFor(m => m.RaceId)
+                <legend>Race: @ViewBag.Race.Name</legend>
+            }
+            else
+            {
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <legend>Race: </legend>
+                        @Html.DropDownListFor(m => m.RaceId, (SelectList)ViewBag.SelectRace, "", new { @class = "form-control" })
+
+                    </div>
+                </div>
+            }
+
+            @Html.HiddenFor(m => m.Id)
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(m => m.FName)
+                    @Html.TextBoxFor(m => m.FName, new { @class = "form-control" })
+                </div>
+
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(m => m.LName)
+                    @Html.TextBoxFor(m => m.LName, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(m => m.SizeId)
+                    @Html.DropDownListFor(m => m.SizeId, (SelectList)ViewBag.SelectSize, "", new { @class = "form-control" })
+                </div>
+
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(m => m.GenderId)
+                    @Html.DropDownListFor(m => m.GenderId, (SelectList)ViewBag.SelectGender, "", new { @class = "form-control" })
+                </div>
+
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(m => m.DOB)
+                    @Html.TextBoxFor(m => m.DOB, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker" })
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(m => m.Email)
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                </div>
+
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(m => m.Phone)
+                    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.WaiverAgreement) @Html.DisplayNameFor(m => m.WaiverAgreement)
+                        @Html.Hidden(nameof(Model.IsTrue), "true")
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">@(isEditMode ? "Save" : "Sign Up")</button>
+                @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-secondary" })
+            </div>
+        }
+    </div>
+</div>
+

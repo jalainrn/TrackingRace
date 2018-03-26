@@ -13,30 +13,24 @@ namespace TrackingRace.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            ViewBag.Title = "Work With Races";
+            ViewBag.Title = "Upcoming Races";
 
             using (var context = new Context())
             {
                 var raceList = new RaceListViewModel
                 {
-                    Races = context.Races.Include("State").Include("RaceType").Select(p => new RaceViewModel
+                    Races = context.Races.Select(p => new RaceViewModel
                     {
                         Id = p.Id,
                         Name = p.Name,
                         Profit = p.Profit,
                         City = p.City,
-                        StateId = p.StateId,// = new StateViewModel
-                        //{
-                        //    Id = p.StateId,
-                        //    Name = p.State.Name,
-                        //    Acronym = p.State.Acronym
-                        //},
-                        RaceTypeId = p.RaceTypeId,//new RaceTypeViewModel
-                        //{
-                        //    Id = p.RaceType.Id,
-                        //    Name = p.RaceType.Name,
-                        //    DistanceKm = p.RaceType.DistanceKm
-                        //}
+                        Date = p.Date,
+                        StateId = p.StateId,
+                        StateName = p.State.Name,
+                        StateAcronym = p.State.Acronym,
+                        RaceTypeName = p.RaceType.Name,
+                        RaceTypeId = p.RaceTypeId
                     }).ToList()
                 };
                 raceList.TotalRaces = raceList.Races.Count;

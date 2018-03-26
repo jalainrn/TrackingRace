@@ -48,5 +48,7 @@ namespace TrackingRaceLibrary.Models
 
         public State State { get; set; }
         public RaceType RaceType { get; set; }
+
+        public virtual List<Runner> Runners { get; set; }
     }
 }
