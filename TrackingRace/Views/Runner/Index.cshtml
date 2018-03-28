@@ -20,62 +20,64 @@
             <th class="d-none d-md-table-cell">DOB</th>
             <th class="d-none d-md-table-cell">Phone</th>
             <th class="d-none d-md-table-cell">Email</th>
+            <th class="d-none d-md-table-cell">Race</th>
             <th>&nbsp;</th>
         </tr>
     </thead>
     <tbody>
         @for (var i = 0; i < Model.Runners.Count; i++)
         {
-            <tr>
-                @*<td>@Model.States[i].Id</td>*@
-                <td>@Model.Runners[i].FName @Model.Runners[i].LName</td>
-                <td class="d-none d-md-table-cell">@Model.Runners[i].GenderId</td>
-                <td class="d-none d-md-table-cell">@Model.Runners[i].DOB.ToShortDateString()</td>
-                <td class="d-none d-md-table-cell">@Model.Runners[i].Phone</td>
-                <td class="d-none d-md-table-cell">@Model.Runners[i].Email</td>
-                <td>
-                    <div class="float-right">
-                        @*<a href="@Url.Action("Detail", new { id = Model.Races[i].Id })" class="btn btn-primary btn-xs margin-right">
-                                <span class="glyphicon glyphicon-info-sign"></span><span class="hidden-xs"> Detail</span>
-                            </a>*@
+        <tr>
+            @*<td>@Model.States[i].Id</td>*@
+            <td>@Model.Runners[i].FName @Model.Runners[i].LName</td>
+            <td class="d-none d-md-table-cell">@Model.Runners[i].GenderId</td>
+            <td class="d-none d-md-table-cell">@Model.Runners[i].DOB.ToShortDateString()</td>
+            <td class="d-none d-md-table-cell">@Model.Runners[i].Phone</td>
+            <td class="d-none d-md-table-cell">@Model.Runners[i].Email</td>
+            <td class="d-none d-md-table-cell">@Model.Runners[i].Email</td>
+            <td>
+                <div class="float-right">
+                    @*<a href="@Url.Action("Detail", new { id = Model.Races[i].Id })" class="btn btn-primary btn-xs margin-right">
+                    <span class="glyphicon glyphicon-info-sign"></span><span class="hidden-xs"> Detail</span>
+                </a>*@
 
-                        @*<div class="btn-group" role="group" aria-label="Basic example">
-                            <a href="@Url.Action("Edit", new { id = Model.Races[i].Id })" class="btn btn-secondary btn-xs margin-right">
-                                <span class="hidden-xs"> Edit</span>
-                            </a>
-                            <a href="@Url.Action("Detail", new { id = Model.Races[i].Id })" class="btn btn-secondary btn-xs margin-right">
-                                <span class="hidden-xs"> Detail</span>
-                            </a>
-                            <a data-toggle="modal" href="@("#deleteRaceModal" + i)" class="btn btn-danger btn-xs margin-right">
-                                <span class="hidden-xs"> Delete</span>
-                            </a>
-                        </div>
+                    @*<div class="btn-group" role="group" aria-label="Basic example">
+                    <a href="@Url.Action("Edit", new { id = Model.Races[i].Id })" class="btn btn-secondary btn-xs margin-right">
+                        <span class="hidden-xs"> Edit</span>
+                    </a>
+                    <a href="@Url.Action("Detail", new { id = Model.Races[i].Id })" class="btn btn-secondary btn-xs margin-right">
+                        <span class="hidden-xs"> Detail</span>
+                    </a>
+                    <a data-toggle="modal" href="@("#deleteRaceModal" + i)" class="btn btn-danger btn-xs margin-right">
+                        <span class="hidden-xs"> Delete</span>
+                    </a>
+                </div>
 
-                        <div class="modal fade" id="@("deleteRaceModal" + i)" tabindex="-1" role="dialog">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    @using (Html.BeginForm("Delete", "State"))
-                                    {
-                                        <input type="hidden" value="@Model.Races[i].Id" name="Id" />
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Delete @Model.Races[i].Name</h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div class="modal fade" id="@("deleteRaceModal" + i)" tabindex="-1" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            @using (Html.BeginForm("Delete", "State"))
+                            {
+                                <input type="hidden" value="@Model.Races[i].Id" name="Id" />
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Delete @Model.Races[i].Name</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-                                        </div>
-                                        <div class="modal-body">
-                                            Are you sure you want to delete @Model.Races[i].Name?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="submit" class="btn btn-primary">Yes</button>
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                        </div>
-                                    }
                                 </div>
-                            </div>
-                        </div>*@
+                                <div class="modal-body">
+                                    Are you sure you want to delete @Model.Races[i].Name?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Yes</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                </div>
+                            }
+                        </div>
                     </div>
-                </td>
-            </tr>
+                </div>*@
+                </div>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

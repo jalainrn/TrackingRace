@@ -57,7 +57,8 @@ namespace TrackingRace.Controllers
                         Email = p.Email,
                         Phone = p.Phone,
                         WaiverAgreement = p.WaiverAgreement,
-                        
+                        //RaceName = p.Races.
+
                     }).ToList()
                 };
                 runnerList.TotalRuners = runnerList.Runners.Count;
@@ -132,7 +133,7 @@ namespace TrackingRace.Controllers
                         DOB = runnerViewModel.DOB,
                         Email = runnerViewModel.Email,
                         Phone = runnerViewModel.Phone,
-                        WaiverAgreement = runnerViewModel.WaiverAgreement
+                        WaiverAgreement = runnerViewModel.WaiverAgreement,
                     };
 
                     context.Runners.Add(runner);

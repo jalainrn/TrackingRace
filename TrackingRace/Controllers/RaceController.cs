@@ -213,5 +213,24 @@ namespace TrackingRace.Controllers
             }
             return View(raceViewModel);
         }
+
+        //Delete
+        [HttpPost]
+        public ActionResult Delete(RaceViewModel raceViewModel)
+        {
+            using (var context = new Context())
+            {
+                var race = context.Races.SingleOrDefault(p => p.Id == raceViewModel.Id);
+                if (race != null)
+                {
+                    TempData["Message"] = race.Name + " race was successfully deleted!";
+                    context.Races.Remove(race);
+                    context.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+            }
+            return new HttpNotFoundResult();
+        }
     }
 }

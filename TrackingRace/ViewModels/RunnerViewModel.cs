@@ -61,5 +61,7 @@ namespace TrackingRace.ViewModels
 
         [Required(ErrorMessage = "Please select a Race")]
         public virtual int RaceId { get; set; }
+
+        public string RaceName { get; set; }
 }
 }

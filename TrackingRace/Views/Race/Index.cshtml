@@ -46,7 +46,7 @@
                         <div class="modal fade" id="@("deleteRaceModal" + i)" tabindex="-1" role="dialog">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                                    @using (Html.BeginForm("Delete", "State"))
+                                    @using (Html.BeginForm("Delete", "Race"))
                                     {
                                         <input type="hidden" value="@Model.Races[i].Id" name="Id" />
                                         <div class="modal-header">
