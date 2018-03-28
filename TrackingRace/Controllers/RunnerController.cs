@@ -149,6 +149,7 @@ namespace TrackingRace.Controllers
 
                     TempData["Message"] = runner.FName + " " + runner.LName + " was successfully registered!";
                 };
+
                 return RedirectToAction("Index", "Home");
             }
             return View("CheckOut", runnerViewModel);

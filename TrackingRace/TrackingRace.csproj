@@ -188,6 +188,7 @@
     <Content Include="Views\Runner\Index.cshtml" />
     <Content Include="Views\Runner\SignupEdit.cshtml" />
     <Content Include="Views\Runner\CheckOut.cshtml" />
+    <Content Include="Views\Runner\PayPalCheckOut.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

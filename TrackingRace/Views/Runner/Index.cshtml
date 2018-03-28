@@ -16,10 +16,10 @@
         <tr>
             @*<th>Id</th>*@
             <th>Name</th>
-            <th>Gender</th>
-            <th>DOB</th>
-            <th>Phone #</th>
-            <th>Email</th>
+            <th class="d-none d-md-table-cell">Gender</th>
+            <th class="d-none d-md-table-cell">DOB</th>
+            <th class="d-none d-md-table-cell">Phone</th>
+            <th class="d-none d-md-table-cell">Email</th>
             <th>&nbsp;</th>
         </tr>
     </thead>
@@ -29,10 +29,10 @@
             <tr>
                 @*<td>@Model.States[i].Id</td>*@
                 <td>@Model.Runners[i].FName @Model.Runners[i].LName</td>
-                <td>@Model.Runners[i].GenderId</td>
-                <td>@Model.Runners[i].DOB.ToShortDateString()</td>
-                <td>@Model.Runners[i].Phone</td>
-                <td>@Model.Runners[i].Email</td>
+                <td class="d-none d-md-table-cell">@Model.Runners[i].GenderId</td>
+                <td class="d-none d-md-table-cell">@Model.Runners[i].DOB.ToShortDateString()</td>
+                <td class="d-none d-md-table-cell">@Model.Runners[i].Phone</td>
+                <td class="d-none d-md-table-cell">@Model.Runners[i].Email</td>
                 <td>
                     <div class="float-right">
                         @*<a href="@Url.Action("Detail", new { id = Model.Races[i].Id })" class="btn btn-primary btn-xs margin-right">

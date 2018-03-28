@@ -1,0 +1,14 @@
+﻿@using System.Configuration
+<body>
+    <form action="@ConfigurationManager.AppSettings["urlSubmitPayment"]">
+        <input type="" name="cmd" value="_xclick" />@*" _cart" />*@
+        <input type="" name="upload" value="1" />
+        <input type="" name="return" value="@ConfigurationManager.AppSettings["urlReturn"]" />
+        <input type="" name="business" value="@ConfigurationManager.AppSettings["accountBusiness"]" />
+
+
+        <input type="" name="@Url.Content("item_name")" value="Shake a Leg - Race" />
+        <input type="" name="@Url.Content("amount")" value="35" />
+    </form>
+</body>
+

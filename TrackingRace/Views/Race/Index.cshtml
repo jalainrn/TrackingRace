@@ -15,22 +15,20 @@
     <thead>
         <tr>
             <th>Race</th>
-            <th>RaceType</th>
-            <th>Profit</th>
-            <th>City</th>
-            <th>State</th>
+            <th class="d-none d-md-table-cell">RaceType</th>
+            <th class="d-none d-md-table-cell">City</th>
+            <th class="d-none d-md-table-cell">State</th>
             <th>&nbsp;</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody> 
         @for (var i = 0; i < Model.Races.Count; i++)
         {
             <tr>
                 <td>@Model.Races[i].Name</td>
-                <td>@Model.Races[i].RaceTypeName</td>
-                <td>@Model.Races[i].Profit</td>
-                <td>@Model.Races[i].City</td>
-                <td>@Model.Races[i].StateName</td>
+                <td class="d-none d-md-table-cell">@Model.Races[i].RaceTypeName</td>
+                <td class="d-none d-md-table-cell">@Model.Races[i].City</td>
+                <td class="d-none d-md-table-cell">@Model.Races[i].StateName</td>
                 <td>
                     <div class="float-right">
                         <div class="btn-group" role="group">
