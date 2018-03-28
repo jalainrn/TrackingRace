@@ -56,8 +56,7 @@ namespace TrackingRace.Controllers
                         DOB = p.DOB,
                         Email = p.Email,
                         Phone = p.Phone,
-                        WaiverAgreement = p.WaiverAgreement,
-                        //RaceName = p.Races.
+                        WaiverAgreement = p.WaiverAgreement
 
                     }).ToList()
                 };

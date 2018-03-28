@@ -60,8 +60,7 @@ namespace TrackingRace.ViewModels
         public virtual List<RaceViewModel> Races { get; set; }
 
         [Required(ErrorMessage = "Please select a Race")]
-        public virtual int RaceId { get; set; }
-
+        public int RaceId { get; set; }
         public string RaceName { get; set; }
 }
 }
