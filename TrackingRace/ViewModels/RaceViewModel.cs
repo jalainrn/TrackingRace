@@ -9,6 +9,11 @@ namespace TrackingRace.ViewModels
 {
     public class RaceViewModel
     {
+        public RaceViewModel()
+        {
+            DateString = Date.ToString("MM/dd/yyyy");
+        }
+
         public int? Id { get; set; }
 
         [Required(ErrorMessage = "The Name field is required")]
@@ -21,6 +26,8 @@ namespace TrackingRace.ViewModels
         [DisplayFormat(DataFormatString = "{MM/dd/yyyy}")]
         [DataType(DataType.Date)]
         public DateTime Date { get; set; }
+
+        public string DateString { get; set; }
 
         [Required(ErrorMessage = "The Race Type is required")]
         [Display(Name = "Race type:")]

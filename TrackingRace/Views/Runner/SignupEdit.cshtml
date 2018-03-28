@@ -27,7 +27,6 @@
                     <div class="form-group col-md-6">
                         <legend>Race: </legend>
                         @Html.DropDownListFor(m => m.RaceId, (SelectList)ViewBag.SelectRace, "", new { @class = "form-control" })
-
                     </div>
                 </div>
             }
@@ -59,7 +58,7 @@
 
                 <div class="form-group col-md-4">
                     @Html.LabelFor(m => m.DOB)
-                    @Html.TextBoxFor(m => m.DOB, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker" })
+                    @Html.TextBoxFor(m => m.DOB, "{0:MM/dd/yyyy}", new { @class = "form-control datepicker" })
                 </div>
             </div>
 

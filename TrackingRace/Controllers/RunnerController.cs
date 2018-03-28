@@ -64,7 +64,8 @@ namespace TrackingRace.Controllers
                 return View(runnerList);
             }
         }
-
+        
+        //Start the Sign-Up proccess
         public ActionResult Signup(int? raceId)
         {
 
@@ -87,9 +88,35 @@ namespace TrackingRace.Controllers
 
             return View("SignupEdit", runnerViewModel);
         }
-
+        
+        //Validate Runner info before submit payment
         [HttpPost]
         public ActionResult Signup(RunnerViewModel runnerViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var race = _context.Races.SingleOrDefault(r => r.Id == runnerViewModel.RaceId);
+                ViewBag.RaceName = race.Name;
+                return View("CheckOut", runnerViewModel);
+            }
+            ViewBag.SelectRace = new SelectList(_context.Races, "Id", "Name");
+            ViewBag.SelectGender = new SelectList(_context.Gender, "Id", "Name");
+            ViewBag.SelectSize = new SelectList(_context.Sizes, "Id", "Name");
+            return View("SignupEdit", runnerViewModel);
+        }
+
+        
+        public ActionResult ReviewInfo(RunnerViewModel runnerViewModel)
+        {
+            ViewBag.SelectRace = new SelectList(_context.Races, "Id", "Name");
+            ViewBag.SelectGender = new SelectList(_context.Gender, "Id", "Name");
+            ViewBag.SelectSize = new SelectList(_context.Sizes, "Id", "Name");
+            return View("SignupEdit", runnerViewModel);
+        }
+
+
+        [HttpPost]
+        public ActionResult SheckOut(RunnerViewModel runnerViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -105,6 +132,7 @@ namespace TrackingRace.Controllers
                         Email = runnerViewModel.Email,
                         Phone = runnerViewModel.Phone,
                         WaiverAgreement = runnerViewModel.WaiverAgreement,
+
                     };
 
                     context.Runners.Add(runner);
@@ -121,7 +149,7 @@ namespace TrackingRace.Controllers
 
                     TempData["Message"] = runner.FName + " " + runner.LName + " was successfully registered!";
                 };
-                
+
                 return RedirectToAction("Index", "Home");
             }
             ViewBag.SelectRace = new SelectList(_context.Races, "Id", "Name");

@@ -50,6 +50,7 @@ namespace TrackingRace.Controllers
                         Name = p.Name,
                         Profit = p.Profit,
                         City = p.City,
+                        Date = p.Date,
                         StateId = p.StateId,
                         StateName = p.State.Name,
                         StateAcronym = p.State.Acronym,
@@ -78,10 +79,10 @@ namespace TrackingRace.Controllers
                     {
                         Id = race.Id,
                         Name = race.Name,
-                        Date = race.Date,
                         Profit = race.Profit,
                         Address = race.Address,
                         City = race.City,
+                        DateString = race.Date.ToShortDateString(),
                         StateId = race.StateId,
                         RaceTypeId = race.RaceTypeId,
                         StateName = race.State.Name,
@@ -89,7 +90,7 @@ namespace TrackingRace.Controllers
                         ZipCode = race.ZipCode
                     };
 
-                    ViewBag.Title = "Detail " + raceViewModel.Name;
+                    ViewBag.Title = "Detail: " + raceViewModel.Name;
                     return View(raceViewModel);
                 }
             }
@@ -148,32 +149,6 @@ namespace TrackingRace.Controllers
                 _context.States, "Id", "Name");
 
             return View("AddEdit", raceViewModel);
-        }
-        
-        //Detail
-        public ActionResult DetailRace(int id)
-        {
-            //ViewBag.Title = "Detail";
-            using (var context = new Context())
-            {
-                //var restaurant = lunchContext.Restaurants.SingleOrDefault(p => p.RestaurantId == id);
-                var race = context.Races.SingleOrDefault(p => p.Id == id);
-                if (race != null)
-                {
-                    var raceViewModel = new RaceViewModel
-                    {
-                        Id = race.Id,
-                        Name = race.Name,
-                        Profit = race.Profit,
-                        City = race.City,
-                        StateId = race.StateId,
-                        RaceTypeId = race.RaceTypeId
-                    };
-                    ViewBag.Title = "Detail " + raceViewModel.Name;
-                    return View(raceViewModel);
-                }
-            }
-            return new HttpNotFoundResult();
         }
     }
 }

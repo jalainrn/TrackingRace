@@ -1,0 +1,118 @@
+﻿@model TrackingRace.ViewModels.RunnerViewModel
+@using System.Configuration
+@Html.Partial("_Message")
+
+@{
+    var isEditMode = Model.Id != null;
+    ViewBag.Title = isEditMode ? "Edit" : "Check Out";
+}
+
+<h2>@ViewBag.Title</h2>
+<div class="row">
+    <div class="col-sm-12 col-xs-10">
+
+        @*<form action="@ConfigurationManager.AppSettings["urlSubmitPayment"]">
+            <input type="hidden" name="cmd" value="_xclick" />
+            <input type="hidden" name="upload" value="1" />
+            <input type="hidden" name="return" value="@ConfigurationManager.AppSettings["urlReturn"]" />
+            <input type="hidden" name="business" value="@ConfigurationManager.AppSettings["accountBusiness"]" />*@
+
+
+        @using (Html.BeginForm("SheckOut", "Runner"))
+        {
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label class="float-right">Race: </label>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>@ViewBag.RaceName</label>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(m => m.FName, new { @class = "float-right" })
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.DisplayFor(m => m.FName)
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(m => m.LName, new { @class = "float-right" })
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.DisplayFor(m => m.LName)
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(m => m.SizeId, new { @class = "float-right" })
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.DisplayFor(m => m.SizeId)
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(m => m.GenderId, new { @class = "float-right" })
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.DisplayFor(m => m.GenderId)
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(m => m.DOB, new { @class = "float-right" })
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.DisplayFor(m => m.DOB)
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(m => m.Email, new { @class = "float-right" })
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.DisplayFor(m => m.Email)
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(m => m.Phone, new { @class = "float-right" })
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.DisplayFor(m => m.Phone)
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.CheckBoxFor(m => m.WaiverAgreement, new { @disabled = "disabled" }) @Html.DisplayNameFor(m => m.WaiverAgreement)
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <button type="submit" class="btn btn-primary float-right">Check Out</button>
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.ActionLink("Cancel", "ReviewInfo", Model, new { @class = "btn btn-secondary" })
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
