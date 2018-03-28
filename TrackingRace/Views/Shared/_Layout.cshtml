@@ -1,4 +1,4 @@
-﻿@{ 
+﻿@{
     var applicationName = "Tracking Race";
 }
 <!DOCTYPE html>
@@ -6,7 +6,6 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - @applicationName</title>
     @*<link href="~/Content/bootstrap-lumen.min.css" rel="stylesheet" type="text/css" />*@
     <link href="~/Content/bootstrap-cerulean.min.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
@@ -15,7 +14,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top mb-5">
-        <a class="navbar-brand" href="#">Tracking Race</a>
+        @Html.ActionLink(applicationName, "Index", "Home", new { @class = "navbar-brand" })
         <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation" style="">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -23,6 +22,7 @@
             <ul class="navbar-nav mr-auto">
                 <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Home" ? "nav-item active" : "nav-item")">@Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })</li>
                 <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Race" ? "nav-item active" : "nav-item")">@Html.ActionLink("Races", "Index", "Race", null, new { @class = "nav-link" })</li>
+                <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Runner" ? "nav-item active" : "nav-item")">@Html.ActionLink("Runners", "Index", "Runner", null, new { @class = "nav-link" })</li>
                 <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "State" ? "nav-item active" : "nav-item")">@Html.ActionLink("States", "Index", "State", null, new { @class = "nav-link" })</li>
                 <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Size" ? "nav-item active" : "nav-item")">@Html.ActionLink("Sizes", "Index", "Size", null, new { @class = "nav-link" })</li>
                 <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "RaceType" ? "nav-item active" : "nav-item")">@Html.ActionLink("Race Types", "Index", "RaceType", null, new { @class = "nav-link" })</li>

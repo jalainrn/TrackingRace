@@ -18,7 +18,7 @@
             <input type="hidden" name="business" value="@ConfigurationManager.AppSettings["accountBusiness"]" />*@
 
 
-        @using (Html.BeginForm("SheckOut", "Runner"))
+        @using (Html.BeginForm("SheckOut", "Runner", Model))
         {
 
             <div class="form-row">
@@ -94,13 +94,13 @@
                 </div>
             </div>
 
-            <div class="form-row">
+            @*<div class="form-row">
                 <div class="form-group col-md-6">
                 </div>
                 <div class="form-group col-md-6">
                     @Html.CheckBoxFor(m => m.WaiverAgreement, new { @disabled = "disabled" }) @Html.DisplayNameFor(m => m.WaiverAgreement)
                 </div>
-            </div>
+            </div>*@
 
             <div class="form-row">
                 <div class="form-group col-md-6">

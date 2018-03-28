@@ -24,6 +24,7 @@ namespace TrackingRace.Controllers
                         Id = p.Id,
                         Name = p.Name,
                         Profit = p.Profit,
+                        Address = p.Address,
                         City = p.City,
                         Date = p.Date,
                         StateId = p.StateId,

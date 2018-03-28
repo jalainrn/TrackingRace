@@ -95,14 +95,50 @@ namespace TrackingRaceLibrary.Data
             //Race
             context.Races.Add(new Race()
             {
-                Name = "My First Race",
-                Date = DateTime.Now.Date,
-                RaceTypeId = 4,//new RaceType() { Name = "Marathon", DistanceKm = 42 },
+                Name = "Remember Eli Run",
+                Date = DateTime.Parse("03/31/2018"),
+                RaceTypeId = 1,
                 Profit = true,
-                Address = "1234 St #1",
+                Address = "England Idlewild Park 5550 Idlewild Road Burlington",
+                City = "Boone County",
+                StateId = 18,
+                ZipCode = 41005
+            });
+
+            context.Races.Add(new Race()
+            {
+                Name = "Super Run",
+                Date = DateTime.Parse("03/31/2018"),
+                RaceTypeId = 1,
+                Profit = false,
+                Address = "Cherokee Park • 745 Cochran Hill Rd.",
                 City = "Louisville",
-                StateId = 18,//new State() { Id = 1, Name = "Kentucky", Acronym = "KY" },
-                ZipCode = 40222
+                StateId = 18,
+                ZipCode = 40206
+            });
+
+            context.Races.Add(new Race()
+            {
+                Name = "Hoppy Easter",
+                Date = DateTime.Parse("03/31/2018"),
+                RaceTypeId = 3,
+                Profit = false,
+                Address = "Marina VIsta Park • 5200 E. Eliot St.",
+                City = "Long Beach",
+                StateId = 5,
+                ZipCode = 92803
+            });
+
+            context.Races.Add(new Race()
+            {
+                Name = "Andrew Jackson Marathon",
+                Date = DateTime.Parse("04/07/2018"),
+                RaceTypeId = 4,
+                Profit = false,
+                Address = "91 New Market Street",
+                City = "Jackson",
+                StateId = 43,
+                ZipCode = 38301
             });
 
             context.SaveChanges();

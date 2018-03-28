@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -39,7 +40,7 @@ namespace TrackingRace.Controllers
         // GET: Runner
         public ActionResult Index()
         {
-            ViewBag.Title = "Work With Races";
+            ViewBag.Title = "Work With Runners";
 
             using (var context = new Context())
             {
@@ -131,8 +132,7 @@ namespace TrackingRace.Controllers
                         DOB = runnerViewModel.DOB,
                         Email = runnerViewModel.Email,
                         Phone = runnerViewModel.Phone,
-                        WaiverAgreement = runnerViewModel.WaiverAgreement,
-
+                        WaiverAgreement = runnerViewModel.WaiverAgreement
                     };
 
                     context.Runners.Add(runner);
@@ -149,13 +149,9 @@ namespace TrackingRace.Controllers
 
                     TempData["Message"] = runner.FName + " " + runner.LName + " was successfully registered!";
                 };
-
                 return RedirectToAction("Index", "Home");
             }
-            ViewBag.SelectRace = new SelectList(_context.Races, "Id", "Name");
-            ViewBag.SelectGender = new SelectList(_context.Gender, "Id", "Name");
-            ViewBag.SelectSize = new SelectList(_context.Sizes, "Id", "Name");
-            return View("SignupEdit", runnerViewModel);
+            return View("CheckOut", runnerViewModel);
         }
     }
 }

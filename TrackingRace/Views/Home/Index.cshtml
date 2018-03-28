@@ -21,7 +21,8 @@
                         <div class="card-body">
                             <h4 class="card-title">@Model.Races[i].Name</h4>
                             <div>@Model.Races[i].RaceTypeName</div>
-                            <div>@Html.Raw((Model.Races[i].Profit == true) ? "<div>Profit</div>" : "<div>Nonprofit</div>")</div>
+                            @*<div>@Html.Raw((Model.Races[i].Profit == true) ? "<div>Profit</div>" : "<div>Nonprofit</div>")</div>*@
+                            <div>@Model.Races[i].Address</div>
                             <div>@Model.Races[i].Date.ToString("MM/dd/yyyy")</div>
                             <div class="d-inline-block float-right">
                                 <a href="@Url.Action("Signup", "Runner", new { raceId = Model.Races[i].Id })" class="btn btn-primary btn-sm">Sign up</a>

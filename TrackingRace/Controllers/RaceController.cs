@@ -150,5 +150,68 @@ namespace TrackingRace.Controllers
 
             return View("AddEdit", raceViewModel);
         }
+
+        public ActionResult Edit(int id)
+        {
+            using (var context = new Context())
+            {
+                var race = context.Races.SingleOrDefault(p => p.Id == id);
+                if (race != null)
+                {
+                    var raceViewModel = new RaceViewModel
+                    {
+                        Id = race.Id,
+                        Name = race.Name,
+                        Date = race.Date,
+                        RaceTypeId = race.RaceTypeId,
+                        Address = race.Address,
+                        City = race.City,
+                        StateId = race.StateId,
+                        ZipCode = race.ZipCode,
+                        Profit = race.Profit
+                    };
+
+                    ViewBag.SelectRaceType = new SelectList(
+                        _context.RaceTypes, "Id", "Name");
+
+                    ViewBag.SelectState = new SelectList(
+                        _context.States, "Id", "Name");
+
+                    return View("AddEdit", raceViewModel);
+                }
+            }
+            return new HttpNotFoundResult();
+        }
+
+        [HttpPost]
+        public ActionResult Edit(RaceViewModel raceViewModel)
+        {
+            //ValdateState(stateViewModel);
+
+            if (ModelState.IsValid)
+            {
+                using (var context = new Context())
+                {
+                    var race = context.Races.SingleOrDefault(p => p.Id == raceViewModel.Id);
+
+                    if (race != null)
+                    {
+                        race.Name = raceViewModel.Name;
+                        race.Date = raceViewModel.Date;
+                        race.RaceTypeId = raceViewModel.RaceTypeId;
+                        race.Address = raceViewModel.Address;
+                        race.City = raceViewModel.City;
+                        race.StateId = raceViewModel.StateId;
+                        race.ZipCode = raceViewModel.ZipCode;
+                        race.Profit = raceViewModel.Profit;
+
+                        TempData["Message"] = "This race was successfully updated!";
+                        context.SaveChanges();
+                        return RedirectToAction("Index");
+                    };
+                }
+            }
+            return View(raceViewModel);
+        }
     }
 }
