@@ -20,7 +20,7 @@ namespace TrackingRaceLibrary.Models
         //public string City { get; set; }
         //public string StateId { get; set; }
         //public int ZipCode { get; set; }
-        public string SizeId { get; set; }
+        public int SizeId { get; set; }
         public Size Size { get; set; }
 
         public string GenderId { get; set; }

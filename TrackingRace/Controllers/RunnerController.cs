@@ -97,12 +97,14 @@ namespace TrackingRace.Controllers
             if (ModelState.IsValid)
             {
                 var race = _context.Races.SingleOrDefault(r => r.Id == runnerViewModel.RaceId);
+                runnerViewModel.Gender = _context.Gender.SingleOrDefault(g => g.Id == runnerViewModel.GenderId);
+                runnerViewModel.Size = _context.Sizes.SingleOrDefault(s => s.Id == runnerViewModel.SizeId);
                 ViewBag.RaceName = race.Name;
                 return View("CheckOut", runnerViewModel);
             }
-            ViewBag.SelectRace = new SelectList(_context.Races, "Id", "Name");
-            ViewBag.SelectGender = new SelectList(_context.Gender, "Id", "Name");
-            ViewBag.SelectSize = new SelectList(_context.Sizes, "Id", "Name");
+            //ViewBag.SelectRace = new SelectList(_context.Races, "Id", "Name");
+            //ViewBag.SelectGender = new SelectList(_context.Gender, "Id", "Name");
+            //ViewBag.SelectSize = new SelectList(_context.Sizes, "Id", "Name");
             return View("SignupEdit", runnerViewModel);
         }
 

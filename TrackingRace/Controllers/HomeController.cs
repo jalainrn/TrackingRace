@@ -36,7 +36,7 @@ namespace TrackingRace.Controllers
                 };
                 raceList.TotalRaces = raceList.Races.Count;
 
-                return View(raceList);
+                return View("Index", raceList);
             }
         }
     }

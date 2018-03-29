@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using TrackingRaceLibrary.Models;
 
 namespace TrackingRace.ViewModels
 {
@@ -27,7 +28,7 @@ namespace TrackingRace.ViewModels
 
         [DisplayName("Size:")]
         [Required(ErrorMessage = "The Size field is required")]
-        public string SizeId { get; set; }
+        public int SizeId { get; set; }
 
         [DisplayName("Gender:")]
         [Required(ErrorMessage = "The Gender field is required")]
@@ -44,6 +45,7 @@ namespace TrackingRace.ViewModels
         [EmailAddress]
         public string Email { get; set; }
 
+        [DisplayName("Phone:")]
         [DataType(DataType.PhoneNumber)]
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid Phone number")]
         public string Phone { get; set; }
@@ -54,13 +56,24 @@ namespace TrackingRace.ViewModels
         [Required]
         [DisplayName("I agree to the TrackingRace Agreement and Waiver")]
         [Compare(nameof(IsTrue), ErrorMessage = "I agree to the TrackingRace Agreement and Waiver")]
-        //[Range(typeof(bool), "true", "true", ErrorMessage = "You must agree the waiver agreements to proceed.")]
         public bool WaiverAgreement { get; set; }
 
         public virtual List<RaceViewModel> Races { get; set; }
 
+        //Support Properties 
         [Required(ErrorMessage = "Please select a Race")]
         public int RaceId { get; set; }
         public string RaceName { get; set; }
-}
+
+        [DisplayName("Size:")]
+        public string SizeName { get; set; }
+        public Size Size { get; set; }
+
+
+        [DisplayName("Gender:")]
+        public string GenderName { get; set; }
+        public Gender Gender { get; set; }
+
+
+    }
 }
