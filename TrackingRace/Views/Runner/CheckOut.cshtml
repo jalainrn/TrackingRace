@@ -1,5 +1,4 @@
 ﻿@model TrackingRace.ViewModels.RunnerViewModel
-@using System.Configuration
 @Html.Partial("_Message")
 
 @{
@@ -11,15 +10,10 @@
 <div class="row">
     <div class="col-sm-12 col-xs-10">
 
-        @*<form action="@ConfigurationManager.AppSettings["urlSubmitPayment"]">
-            <input type="hidden" name="cmd" value="_xclick" />
-            <input type="hidden" name="upload" value="1" />
-            <input type="hidden" name="return" value="@ConfigurationManager.AppSettings["urlReturn"]" />
-            <input type="hidden" name="business" value="@ConfigurationManager.AppSettings["accountBusiness"]" />*@
-
 
         @using (Html.BeginForm("SheckOut", "Runner", Model))
         {
+            @Html.ValidationSummary("The following errors were found:", new { @class = "alert alert-dismissible alert-danger"})
 
             <div class="form-row">
                 <div class="form-group col-6">
@@ -94,13 +88,13 @@
                 </div>
             </div>
 
-            @*<div class="form-row">
+            <div class="form-row">
                 <div class="form-group col-md-6">
                 </div>
                 <div class="form-group col-md-6">
                     @Html.CheckBoxFor(m => m.WaiverAgreement, new { @disabled = "disabled" }) @Html.DisplayNameFor(m => m.WaiverAgreement)
                 </div>
-            </div>*@
+            </div>
 
             <div class="form-row">
                 <div class="form-group col-6">

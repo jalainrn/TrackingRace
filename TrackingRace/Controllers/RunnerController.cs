@@ -51,12 +51,13 @@ namespace TrackingRace.Controllers
                         Id = p.Id,
                         FName = p.FName,
                         LName = p.LName,
-                        SizeId = p.SizeId,
-                        GenderId = p.GenderId,
+                        Size = p.Size,
+                        Gender = p.Gender,
                         DOB = p.DOB,
                         Email = p.Email,
                         Phone = p.Phone,
                         WaiverAgreement = p.WaiverAgreement
+
 
                     }).ToList()
                 };
@@ -75,8 +76,11 @@ namespace TrackingRace.Controllers
             runnerViewModel.DOB = DateTime.Now.Date;
             if (raceId != null)
             {
+                //Adding Race to RunnerViewModel
                 runnerViewModel.RaceId = raceId.Value;
-                ViewBag.Race = _context.Races.SingleOrDefault(r => r.Id == raceId);
+                var race = _context.Races.SingleOrDefault(r => r.Id == raceId);
+                runnerViewModel.RaceName = race.Name;
+                ViewBag.Race = race;
             }
             else
             {
@@ -84,7 +88,6 @@ namespace TrackingRace.Controllers
             }
 
             ViewBag.SelectGender = new SelectList(_context.Gender, "Id", "Name");
-
             ViewBag.SelectSize = new SelectList(_context.Sizes, "Id", "Name");
 
             return View("SignupEdit", runnerViewModel);
@@ -102,9 +105,6 @@ namespace TrackingRace.Controllers
                 ViewBag.RaceName = race.Name;
                 return View("CheckOut", runnerViewModel);
             }
-            //ViewBag.SelectRace = new SelectList(_context.Races, "Id", "Name");
-            //ViewBag.SelectGender = new SelectList(_context.Gender, "Id", "Name");
-            //ViewBag.SelectSize = new SelectList(_context.Sizes, "Id", "Name");
             return View("SignupEdit", runnerViewModel);
         }
 
@@ -117,44 +117,40 @@ namespace TrackingRace.Controllers
             return View("SignupEdit", runnerViewModel);
         }
 
-
+        //Saving User
         [HttpPost]
         public ActionResult SheckOut(RunnerViewModel runnerViewModel)
         {
-            if (ModelState.IsValid)
+            using (var context = new Context())
             {
-                using (var context = new Context())
+                var runner = new Runner
                 {
-                    var runner = new Runner
-                    {
-                        FName = runnerViewModel.FName,
-                        LName = runnerViewModel.LName,
-                        SizeId = runnerViewModel.SizeId,
-                        GenderId = runnerViewModel.GenderId,
-                        DOB = runnerViewModel.DOB,
-                        Email = runnerViewModel.Email,
-                        Phone = runnerViewModel.Phone,
-                        WaiverAgreement = runnerViewModel.WaiverAgreement,
-                    };
-
-                    context.Runners.Add(runner);
-                    context.SaveChanges();
-
-                    var raceRunner = new RaceRunner
-                    {
-                        RaceId = runnerViewModel.RaceId,
-                        RunnerId = runner.Id
-                    };
-
-                    context.RaceRunners.Add(raceRunner);
-                    context.SaveChanges();
-
-                    TempData["Message"] = runner.FName + " " + runner.LName + " was successfully registered!";
+                    FName = runnerViewModel.FName,
+                    LName = runnerViewModel.LName,
+                    SizeId = runnerViewModel.SizeId,
+                    GenderId = runnerViewModel.GenderId,
+                    DOB = runnerViewModel.DOB,
+                    Email = runnerViewModel.Email,
+                    Phone = runnerViewModel.Phone,
+                    WaiverAgreement = runnerViewModel.WaiverAgreement,
                 };
 
-                return RedirectToAction("Index", "Home");
-            }
-            return View("CheckOut", runnerViewModel);
+                context.Runners.Add(runner);
+                context.SaveChanges();
+
+                var raceRunner = new RaceRunner
+                {
+                    RaceId = runnerViewModel.RaceId,
+                    RunnerId = runner.Id
+                };
+
+                context.RaceRunners.Add(raceRunner);
+                context.SaveChanges();
+
+                TempData["Message"] = runner.FName + " " + runner.LName + " was successfully registered!";
+            };
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }
