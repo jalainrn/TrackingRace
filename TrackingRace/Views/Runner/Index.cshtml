@@ -14,21 +14,19 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            @*<th>Id</th>*@
             <th>Name</th>
             <th class="d-none d-md-table-cell">Gender</th>
             <th class="d-none d-md-table-cell">Size</th>
             <th class="d-none d-md-table-cell">DOB</th>
             <th class="d-none d-md-table-cell">Phone</th>
             <th class="d-none d-md-table-cell">Email</th>
-            @*<th>&nbsp;</th>*@
+            <th>&nbsp;</th>
         </tr>
     </thead>
     <tbody>
         @for (var i = 0; i < Model.Runners.Count; i++)
         {
         <tr>
-            @*<td>@Model.States[i].Id</td>*@
             <td>@Model.Runners[i].FName @Model.Runners[i].LName</td>
             <td class="d-none d-md-table-cell">@Model.Runners[i].Gender.Name</td>
             <td class="d-none d-md-table-cell">@Model.Runners[i].Size.Name</td>
